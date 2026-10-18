@@ -1,0 +1,38 @@
+.liquid-ether {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  background: #101111;
+}
+
+.liquid-ether::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 72% 42%, var(--ether-color-1, #f4072e), transparent 48%),
+    radial-gradient(ellipse at 45% 72%, var(--ether-color-2, #f40808), transparent 42%),
+    radial-gradient(ellipse at 90% 80%, var(--ether-color-3, #f70f13), transparent 45%);
+  opacity: 0.24;
+}
+
+.liquid-ether[data-ready='true']::before {
+  opacity: 0;
+}
+
+.liquid-ether__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.liquid-ether[data-ready='true'] .liquid-ether__canvas {
+  opacity: 1;
+  visibility: visible;
+}

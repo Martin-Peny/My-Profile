@@ -1,0 +1,76 @@
+.background-music {
+  position: fixed;
+  right: max(20px, env(safe-area-inset-right, 0px));
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 14px 4px 4px;
+  border: 1px solid #57504f;
+  background: #141616;
+  box-shadow: 0 4px 24px #0006;
+  color: var(--text-primary);
+}
+.bgm-toggle {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 44px;
+  padding: 4px 10px;
+  border: 0;
+  text-align: left;
+}
+.bgm-toggle > svg { color: var(--red); }
+.bgm-toggle:hover { background: var(--surface-hover); }
+.bgm-toggle:disabled { cursor: wait; }
+.bgm-label {
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.5;
+  letter-spacing: 1px;
+}
+.bgm-label > span {
+  display: block;
+  min-width: 50px;
+  font-size: 8px;
+  color: var(--text-secondary);
+}
+.bgm-volume {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-left: 1px solid var(--line);
+  padding-left: 12px;
+  color: var(--text-secondary);
+}
+.bgm-volume input {
+  width: 65px;
+  height: 44px;
+  margin: 0;
+  accent-color: var(--red);
+  cursor: pointer;
+}
+.bgm-error {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  right: 0;
+  width: 230px;
+  padding: 10px 12px;
+  background: #141616;
+  border: 1px solid #79514f;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--text-primary);
+}
+@media (max-width: 760px) {
+  .background-music {
+    right: max(12px, env(safe-area-inset-right, 0px));
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    gap: 8px;
+    padding-right: 10px;
+  }
+  .bgm-volume { gap: 6px; padding-left: 8px; }
+  .bgm-volume input { width: 52px; }
+}

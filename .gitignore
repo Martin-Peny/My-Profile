@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.DS_Store
+*.local
+artifacts/
+playwright-report/
+test-results/
+
+# Keep private source material and local credentials out of the repository.
+photo/
+scripts/assets/
+docs/information/
+.env
+.env.*

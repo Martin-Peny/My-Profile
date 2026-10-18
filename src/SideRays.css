@@ -1,0 +1,30 @@
+.side-rays {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.side-rays::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 105% 0%, var(--side-rays-color-a) 0%, transparent 55%),
+    conic-gradient(from 210deg at 105% -8%, transparent, var(--side-rays-color-b) 12deg, transparent 22deg, var(--side-rays-color-a) 35deg, transparent 52deg);
+  opacity: 0.3;
+}
+
+.side-rays[data-ready='true']::before { opacity: 0; }
+
+.side-rays__canvas {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+
+.side-rays[data-ready='true'] .side-rays__canvas { visibility: visible; }

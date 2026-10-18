@@ -1,0 +1,93 @@
+.vinyl-record {
+  position: relative;
+  width: calc(var(--vinyl-size) * 0.7);
+  height: calc(var(--vinyl-size) * 0.7);
+  overflow: clip;
+  pointer-events: none;
+}
+.gallery-vinyl {
+  position: absolute;
+  top: calc(var(--vinyl-size) * -0.3);
+  right: calc(var(--vinyl-size) * -0.3);
+  width: var(--vinyl-size);
+  height: var(--vinyl-size);
+  pointer-events: none;
+}
+.gallery-vinyl::before {
+  content: "";
+  position: absolute;
+  inset: -28px;
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 62%, #d7192024 66%, #a10b1110 69%, transparent 72%);
+}
+.gallery-vinyl-disc {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #b8242a;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle, transparent 0 3px, #70707018 3px 4px, #0008 4px 5px),
+    conic-gradient(from 24deg, #0a0a0b, #232022 38deg, #080809 73deg,
+      #11090b 116deg, #501319 145deg, #160b0d 162deg, #080809 196deg,
+      #252123 240deg, #0b0b0c 278deg, #270d11 315deg, #0a0a0b);
+  box-shadow: inset 0 0 0 6px #070707, inset 0 0 0 8px #75131b,
+    inset 0 0 35px 12px #0009, 0 0 20px #dd162622;
+  animation: gallery-vinyl-spin 24s linear infinite;
+  animation-play-state: paused;
+}
+.vinyl-record[data-running="true"] .gallery-vinyl-disc {
+  animation-play-state: running;
+}
+.gallery-vinyl-disc::before,
+.gallery-vinyl-disc::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.gallery-vinyl-disc::before {
+  inset: 3%;
+  border: 1px solid #bb303540;
+}
+.gallery-vinyl-disc::after {
+  inset: 32%;
+  border: 1px solid #9e252c70;
+  background: radial-gradient(circle, #090909 48%, #171013 69%, #080808 70%);
+  box-shadow: 0 0 0 5px #0005, 0 0 0 7px #80303920;
+}
+.gallery-vinyl-label {
+  position: absolute;
+  inset: 38%;
+  z-index: 1;
+  border: 1px solid #de444c;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 36% 26%, #e53b3930, transparent 60%),
+    conic-gradient(from -30deg, #8c151e, #4c0b13 90deg, #b2232e 92deg,
+      #87131d 118deg, #430a11 120deg, #6a1019 280deg, #8c151e);
+  box-shadow: 0 0 0 5px #0c090a, 0 0 0 6px #81212b;
+}
+.gallery-vinyl-label::before,
+.gallery-vinyl-label::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.gallery-vinyl-label::before {
+  inset: 12%;
+  border: 1px solid #e562674d;
+  border-right-color: #e5626710;
+  border-bottom-color: #e5626710;
+}
+.gallery-vinyl-label::after {
+  inset: 45%;
+  background: #080808;
+  border: 1px solid #bf7478;
+  box-shadow: 0 0 0 4px #24080e, 0 0 0 5px #b74a5359;
+}
+@keyframes gallery-vinyl-spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vinyl-record .gallery-vinyl-disc { animation-play-state: paused; }
+}

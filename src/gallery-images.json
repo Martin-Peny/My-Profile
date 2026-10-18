@@ -1,0 +1,933 @@
+[
+  {
+    "id": "ad7e6110a922",
+    "row": "top",
+    "width": 1620,
+    "height": 1080,
+    "alt": "A performer in a red jacket on a blue-lit stage.",
+    "variants": [
+      {
+        "src": "images/gallery/ad7e6110a922-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/ad7e6110a922-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "e12dd3ae67e8",
+    "row": "middle",
+    "width": 1440,
+    "height": 2163,
+    "alt": "A graduate in a cap and gown holding a plush toy against a blue backdrop.",
+    "variants": [
+      {
+        "src": "images/gallery/e12dd3ae67e8-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/e12dd3ae67e8-840.webp",
+        "width": 559,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "48e65d4c79a2",
+    "row": "bottom",
+    "width": 7952,
+    "height": 5304,
+    "alt": "A singer holding a microphone beside a keyboard on stage.",
+    "variants": [
+      {
+        "src": "images/gallery/48e65d4c79a2-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/48e65d4c79a2-840.webp",
+        "width": 1259,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "9e7786f6bd46",
+    "row": "middle",
+    "width": 1080,
+    "height": 1620,
+    "alt": "A person singing beside a music stand in a room.",
+    "variants": [
+      {
+        "src": "images/gallery/9e7786f6bd46-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/9e7786f6bd46-840.webp",
+        "width": 560,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "3902efd1aa6d",
+    "row": "top",
+    "width": 1170,
+    "height": 658,
+    "alt": "A seated figure in dark clothing against a pale wall.",
+    "variants": [
+      {
+        "src": "images/gallery/3902efd1aa6d-420.webp",
+        "width": 747,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/3902efd1aa6d-658.webp",
+        "width": 1170,
+        "height": 658
+      }
+    ]
+  },
+  {
+    "id": "9f83a1dbe6d3",
+    "row": "middle",
+    "width": 1080,
+    "height": 1440,
+    "alt": "A black and white photograph of two people on steps.",
+    "variants": [
+      {
+        "src": "images/gallery/9f83a1dbe6d3-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/9f83a1dbe6d3-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "c61b6221c1e0",
+    "row": "middle",
+    "width": 1080,
+    "height": 1620,
+    "alt": "A singer holding a microphone beneath bright stage lights.",
+    "variants": [
+      {
+        "src": "images/gallery/c61b6221c1e0-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/c61b6221c1e0-840.webp",
+        "width": 560,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "e06d815d827b",
+    "row": "bottom",
+    "width": 1440,
+    "height": 1080,
+    "alt": "Two people wearing glasses and posing side by side indoors.",
+    "variants": [
+      {
+        "src": "images/gallery/e06d815d827b-420.webp",
+        "width": 560,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/e06d815d827b-840.webp",
+        "width": 1120,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "7c0d6e198894",
+    "row": "middle",
+    "width": 1080,
+    "height": 1440,
+    "alt": "A close portrait with a plush toy resting on the person's head.",
+    "variants": [
+      {
+        "src": "images/gallery/7c0d6e198894-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/7c0d6e198894-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "88f37273a7be",
+    "row": "middle",
+    "width": 1080,
+    "height": 1440,
+    "alt": "Two people seated together beside a window.",
+    "variants": [
+      {
+        "src": "images/gallery/88f37273a7be-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/88f37273a7be-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "25561efe4a65",
+    "row": "middle",
+    "width": 1080,
+    "height": 1620,
+    "alt": "A person in a dark jacket holding a yellow bag indoors.",
+    "variants": [
+      {
+        "src": "images/gallery/25561efe4a65-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/25561efe4a65-840.webp",
+        "width": 560,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "6ed9e6b4bebf",
+    "row": "middle",
+    "width": 1080,
+    "height": 1620,
+    "alt": "A blurred portrait illuminated by deep blue light.",
+    "variants": [
+      {
+        "src": "images/gallery/6ed9e6b4bebf-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/6ed9e6b4bebf-840.webp",
+        "width": 560,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "ce97d0aa936f",
+    "row": "middle",
+    "width": 1080,
+    "height": 1620,
+    "alt": "A group posing together in formal black and white clothing.",
+    "variants": [
+      {
+        "src": "images/gallery/ce97d0aa936f-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/ce97d0aa936f-840.webp",
+        "width": 560,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "cb008028801c",
+    "row": "middle",
+    "width": 1080,
+    "height": 1440,
+    "alt": "Two people taking a mirror photograph together.",
+    "variants": [
+      {
+        "src": "images/gallery/cb008028801c-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/cb008028801c-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "35f5dc9820a6",
+    "row": "top",
+    "width": 1620,
+    "height": 1080,
+    "alt": "Two people holding microphones on a stage.",
+    "variants": [
+      {
+        "src": "images/gallery/35f5dc9820a6-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/35f5dc9820a6-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "f5ce7489abe7",
+    "row": "bottom",
+    "width": 1620,
+    "height": 1080,
+    "alt": "A performer silhouetted before a projected ocean scene.",
+    "variants": [
+      {
+        "src": "images/gallery/f5ce7489abe7-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/f5ce7489abe7-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "3e1c99679cfb",
+    "row": "top",
+    "width": 1620,
+    "height": 1080,
+    "alt": "A performer on stage beneath large projected lettering.",
+    "variants": [
+      {
+        "src": "images/gallery/3e1c99679cfb-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/3e1c99679cfb-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "90eaa41c5d01",
+    "row": "bottom",
+    "width": 1620,
+    "height": 1080,
+    "alt": "A singer in dark clothing on a stage with red floor lights.",
+    "variants": [
+      {
+        "src": "images/gallery/90eaa41c5d01-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/90eaa41c5d01-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "a27465e623c8",
+    "row": "top",
+    "width": 1620,
+    "height": 1080,
+    "alt": "A group posing on stage in front of a red curtain.",
+    "variants": [
+      {
+        "src": "images/gallery/a27465e623c8-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/a27465e623c8-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "249f1af42ae6",
+    "row": "middle",
+    "width": 1080,
+    "height": 1440,
+    "alt": "A close portrait of a person wearing dark-rimmed glasses.",
+    "variants": [
+      {
+        "src": "images/gallery/249f1af42ae6-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/249f1af42ae6-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "a7186dc0af9d",
+    "row": "middle",
+    "width": 1080,
+    "height": 1620,
+    "alt": "Two presenters standing together before a red curtain.",
+    "variants": [
+      {
+        "src": "images/gallery/a7186dc0af9d-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/a7186dc0af9d-840.webp",
+        "width": 560,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "a852713836ae",
+    "row": "middle",
+    "width": 1080,
+    "height": 1440,
+    "alt": "A close photograph of a singer beneath blue and purple stage lights.",
+    "variants": [
+      {
+        "src": "images/gallery/a852713836ae-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/a852713836ae-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "1214bba8b876",
+    "row": "bottom",
+    "width": 1920,
+    "height": 1080,
+    "alt": "A group in coats posing against a light background.",
+    "variants": [
+      {
+        "src": "images/gallery/1214bba8b876-420.webp",
+        "width": 747,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/1214bba8b876-840.webp",
+        "width": 1493,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "86f3fc1dcd46",
+    "row": "middle",
+    "width": 1080,
+    "height": 1440,
+    "alt": "A person standing beside a decorated tree indoors.",
+    "variants": [
+      {
+        "src": "images/gallery/86f3fc1dcd46-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/86f3fc1dcd46-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "98bf25bd2f9f",
+    "row": "top",
+    "width": 1620,
+    "height": 1080,
+    "alt": "A singer in a red jacket against a pink stage backdrop.",
+    "variants": [
+      {
+        "src": "images/gallery/98bf25bd2f9f-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/98bf25bd2f9f-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "1d49f6419383",
+    "row": "middle",
+    "width": 1440,
+    "height": 2153,
+    "alt": "A portrait in dark clothing against leafy greenery.",
+    "variants": [
+      {
+        "src": "images/gallery/1d49f6419383-420.webp",
+        "width": 281,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/1d49f6419383-840.webp",
+        "width": 562,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "7ce70fe92c29",
+    "row": "middle",
+    "width": 1080,
+    "height": 1440,
+    "alt": "A person in a red jacket seated at a table.",
+    "variants": [
+      {
+        "src": "images/gallery/7ce70fe92c29-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/7ce70fe92c29-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "d15dddd4a9b6",
+    "row": "middle",
+    "width": 4000,
+    "height": 6000,
+    "alt": "A singer in a black jacket holding a microphone.",
+    "variants": [
+      {
+        "src": "images/gallery/d15dddd4a9b6-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/d15dddd4a9b6-840.webp",
+        "width": 560,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "04e5d9cd0ca7",
+    "row": "bottom",
+    "width": 1623,
+    "height": 1080,
+    "alt": "A singer performing in front of a blue sky projection.",
+    "variants": [
+      {
+        "src": "images/gallery/04e5d9cd0ca7-420.webp",
+        "width": 631,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/04e5d9cd0ca7-840.webp",
+        "width": 1262,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "1f3976d9e9da",
+    "row": "top",
+    "width": 1621,
+    "height": 1080,
+    "alt": "A singer on a red-lit stage in front of an audience.",
+    "variants": [
+      {
+        "src": "images/gallery/1f3976d9e9da-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/1f3976d9e9da-840.webp",
+        "width": 1261,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "f49303461b1b",
+    "row": "bottom",
+    "width": 1620,
+    "height": 1080,
+    "alt": "Two people posing together against a light background.",
+    "variants": [
+      {
+        "src": "images/gallery/f49303461b1b-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/f49303461b1b-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "2da7efebab0b",
+    "row": "top",
+    "width": 1620,
+    "height": 1080,
+    "alt": "A performer holding a microphone before a projected backdrop.",
+    "variants": [
+      {
+        "src": "images/gallery/2da7efebab0b-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/2da7efebab0b-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "d0e7515933c4",
+    "row": "bottom",
+    "width": 1620,
+    "height": 1080,
+    "alt": "A close stage photograph of a singer wearing glasses.",
+    "variants": [
+      {
+        "src": "images/gallery/d0e7515933c4-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/d0e7515933c4-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "925cb1811727",
+    "row": "top",
+    "width": 1620,
+    "height": 1080,
+    "alt": "A singer silhouetted against large white projected lettering.",
+    "variants": [
+      {
+        "src": "images/gallery/925cb1811727-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/925cb1811727-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "875ff9c9a7f5",
+    "row": "middle",
+    "width": 1280,
+    "height": 1708,
+    "alt": "A person in a red jacket leaning over a bowl of food.",
+    "variants": [
+      {
+        "src": "images/gallery/875ff9c9a7f5-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/875ff9c9a7f5-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "96dd472a9dc9",
+    "row": "bottom",
+    "width": 1620,
+    "height": 1080,
+    "alt": "Several performers standing across a brightly lit stage.",
+    "variants": [
+      {
+        "src": "images/gallery/96dd472a9dc9-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/96dd472a9dc9-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "05326da7b05d",
+    "row": "top",
+    "width": 1170,
+    "height": 658,
+    "alt": "A group posing together under green indoor lighting.",
+    "variants": [
+      {
+        "src": "images/gallery/05326da7b05d-420.webp",
+        "width": 747,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/05326da7b05d-658.webp",
+        "width": 1170,
+        "height": 658
+      }
+    ]
+  },
+  {
+    "id": "52c26497cc05",
+    "row": "middle",
+    "width": 1080,
+    "height": 1440,
+    "alt": "A person wearing glasses and a red hooded jacket.",
+    "variants": [
+      {
+        "src": "images/gallery/52c26497cc05-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/52c26497cc05-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "df14468ed65f",
+    "row": "bottom",
+    "width": 1620,
+    "height": 1080,
+    "alt": "A person in a dark sweatshirt seated on wooden flooring.",
+    "variants": [
+      {
+        "src": "images/gallery/df14468ed65f-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/df14468ed65f-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "481f020a145a",
+    "row": "top",
+    "width": 1620,
+    "height": 1080,
+    "alt": "A person in dark clothing standing on a dim stairway.",
+    "variants": [
+      {
+        "src": "images/gallery/481f020a145a-420.webp",
+        "width": 630,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/481f020a145a-840.webp",
+        "width": 1260,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "df7c5bd5ea13",
+    "row": "bottom",
+    "width": 1170,
+    "height": 658,
+    "alt": "A shadowed portrait against a blue background with lettering.",
+    "variants": [
+      {
+        "src": "images/gallery/df7c5bd5ea13-420.webp",
+        "width": 747,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/df7c5bd5ea13-658.webp",
+        "width": 1170,
+        "height": 658
+      }
+    ]
+  },
+  {
+    "id": "164cbdcb6085",
+    "row": "middle",
+    "width": 1080,
+    "height": 1620,
+    "alt": "A person in a striped shirt posing against a blue backdrop.",
+    "variants": [
+      {
+        "src": "images/gallery/164cbdcb6085-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/164cbdcb6085-840.webp",
+        "width": 560,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "6a29c856dc84",
+    "row": "middle",
+    "width": 1080,
+    "height": 1440,
+    "alt": "A person in a patterned shirt holding a microphone before an orange backdrop.",
+    "variants": [
+      {
+        "src": "images/gallery/6a29c856dc84-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/6a29c856dc84-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "c31712749e8b",
+    "row": "top",
+    "width": 1440,
+    "height": 1080,
+    "alt": "A large ensemble gathered on a concert stage.",
+    "variants": [
+      {
+        "src": "images/gallery/c31712749e8b-420.webp",
+        "width": 560,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/c31712749e8b-840.webp",
+        "width": 1120,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "5329cb65e882",
+    "row": "middle",
+    "width": 1080,
+    "height": 1620,
+    "alt": "A person wearing glasses and a white shirt indoors.",
+    "variants": [
+      {
+        "src": "images/gallery/5329cb65e882-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/5329cb65e882-840.webp",
+        "width": 560,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "22a3ef9841fb",
+    "row": "middle",
+    "width": 2000,
+    "height": 3000,
+    "alt": "A singer raising one arm beneath colorful stage lights.",
+    "variants": [
+      {
+        "src": "images/gallery/22a3ef9841fb-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/22a3ef9841fb-840.webp",
+        "width": 560,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "fe66e1b76aba",
+    "row": "bottom",
+    "width": 1877,
+    "height": 1080,
+    "alt": "A group in dark coats posing outdoors beside a building.",
+    "variants": [
+      {
+        "src": "images/gallery/fe66e1b76aba-420.webp",
+        "width": 730,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/fe66e1b76aba-840.webp",
+        "width": 1460,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "22ff4ab24c5f",
+    "row": "middle",
+    "width": 1080,
+    "height": 1620,
+    "alt": "A performer holding a microphone in front of a red curtain.",
+    "variants": [
+      {
+        "src": "images/gallery/22ff4ab24c5f-420.webp",
+        "width": 280,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/22ff4ab24c5f-840.webp",
+        "width": 560,
+        "height": 840
+      }
+    ]
+  },
+  {
+    "id": "9685723abdd6",
+    "row": "middle",
+    "width": 1440,
+    "height": 1920,
+    "alt": "A person making peace signs behind a small cake.",
+    "variants": [
+      {
+        "src": "images/gallery/9685723abdd6-420.webp",
+        "width": 315,
+        "height": 420
+      },
+      {
+        "src": "images/gallery/9685723abdd6-840.webp",
+        "width": 630,
+        "height": 840
+      }
+    ]
+  }
+]
