@@ -17,6 +17,7 @@ export default function AcademicWorkbench() {
   useEffect(() => {
     if (!bookOpen) return;
     let frame = 0;
+    let previousBounds: number[] | undefined;
     const frameBook = () => {
       const viewport = viewportRef.current;
       const book = targets.current.book;
@@ -28,7 +29,16 @@ export default function AcademicWorkbench() {
       }
       const bounds = book.getBoundingClientRect();
       const view = viewport.getBoundingClientRect();
-      viewport.scrollTo({ left: bounds.left - view.left + viewport.scrollLeft - 24, top: bounds.top - view.top + viewport.scrollTop - 24 });
+      const left = bounds.left - view.left + viewport.scrollLeft;
+      const top = bounds.top - view.top + viewport.scrollTop;
+      const currentBounds = [left, top, bounds.width, bounds.height];
+      // ResizeObserver can update the projection after the first settled render.
+      if (!previousBounds || currentBounds.some((value, index) => Math.abs(value - previousBounds![index]!) > .5)) {
+        previousBounds = currentBounds;
+        frame = requestAnimationFrame(frameBook);
+        return;
+      }
+      viewport.scrollTo({ left: left - 24, top: top - 24 });
     };
     frame = requestAnimationFrame(() => { frame = requestAnimationFrame(frameBook); });
     return () => cancelAnimationFrame(frame);

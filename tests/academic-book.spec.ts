@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { academicNotebook } from "../src/content";
-import chinese from "../src/locales/zh.json";
+import chinese from "../src/locales/zh.json" with { type: "json" };
 
 test("physical book opens on its hinge, responds to hover and keyboard, and sleeps when settled", async ({ page }) => {
   const errors: string[] = [];
@@ -28,14 +28,14 @@ test("physical book opens on its hinge, responds to hover and keyboard, and slee
   await expect(button).toHaveAttribute("aria-expanded", "true");
   await expect.poll(async () => Number(await scene.getAttribute("data-book-height"))).toBeGreaterThan(.3);
   expect(Number(await scene.getAttribute("data-book-height"))).toBeLessThan(2.2);
-  expect(Number(await scene.getAttribute("data-book-scale"))).toBeLessThan(2.05);
+  expect(Number(await scene.getAttribute("data-book-scale"))).toBeLessThan(1.45);
   await expect.poll(async () => Number(await scene.getAttribute("data-hinge"))).toBeGreaterThan(3);
   await expect(page.locator(".academic-book-content")).toHaveCount(0);
   await expect(page.locator("#academic-book-content")).toHaveClass("sr-only");
   await expect(scene).toHaveAttribute("data-motion", "idle");
   await expect(scene).toHaveAttribute("data-book-height", "2.200");
-  await expect(scene).toHaveAttribute("data-book-scale", "2.050");
-  await stage.screenshot({ path: "artifacts/academic-book-3d-open.png", style: ".background-music { visibility: hidden !important; }" });
+  await expect(scene).toHaveAttribute("data-book-scale", "1.450");
+  await page.locator(".academic-book-viewport").screenshot({ path: "artifacts/academic-book-3d-open.png", style: ".background-music { visibility: hidden !important; }" });
   await page.locator(".academic-inbook-close").click();
   await expect(button).toBeFocused();
   await expect(button).toHaveAttribute("aria-expanded", "false");
@@ -74,18 +74,25 @@ for (const language of ["en", "zh"]) {
       await expect(scene).toHaveAttribute("data-motion", "static");
       const openBox = (await book.boundingBox())!;
       expect(openBox.width).toBeGreaterThan(bookBox.width * 2);
-      expect(openBox.x).toBeGreaterThanOrEqual(0);
-      expect(openBox.x + openBox.width).toBeLessThanOrEqual(width);
+      const viewport = page.locator(".academic-book-viewport");
+      await expect(viewport).toHaveClass(/is-zoomed/);
+      await expect.poll(async () => {
+        const bookBounds = (await book.boundingBox())!;
+        const viewBounds = (await viewport.boundingBox())!;
+        return Math.abs(bookBounds.x - viewBounds.x - 24) + Math.abs(bookBounds.y - viewBounds.y - 24);
+      }).toBeLessThan(3);
+      expect(openBox.width).toBeGreaterThan(width);
+      expect(await viewport.evaluate(el => el.scrollWidth > el.clientWidth)).toBe(true);
       await expect(page.locator(".academic-book-content")).toHaveCount(0);
       expect((await page.locator("#academic-book-content").boundingBox())!.height).toBeLessThanOrEqual(1);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       await page.locator(".academic-page-hit-right").click();
       await expect(scene).toHaveAttribute("data-page-turn", "3.142");
       await expect(page.locator(".academic-reader-page h3")).toHaveText(language === "zh" ? ["研究项目", "实践经历"] : ["Research Projects", "Professional Experience"]);
-      await stage.screenshot({ path: `artifacts/academic-book-second-${language}-${width}.png`, style: ".background-music { visibility: hidden !important; }" });
+      await viewport.screenshot({ path: `artifacts/academic-book-second-${language}-${width}.png`, style: ".background-music { visibility: hidden !important; }" });
       await page.locator(".academic-page-hit-left").click();
       await expect(scene).toHaveAttribute("data-page-turn", "0.000");
-      await stage.screenshot({ path: `artifacts/academic-book-3d-open-${language}-${width}.png`, style: ".background-music { visibility: hidden !important; }" });
+      await viewport.screenshot({ path: `artifacts/academic-book-3d-open-${language}-${width}.png`, style: ".background-music { visibility: hidden !important; }" });
       await page.locator(".academic-inbook-close").click();
       await expect(book).toHaveAttribute("aria-expanded", "false");
       await expect(scene).toHaveAttribute("data-hinge", "0.000");
@@ -147,7 +154,7 @@ test("book reverses its flight and responds immediately to a changed motion pref
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(scene).toHaveAttribute("data-motion", "static");
   await expect(scene).toHaveAttribute("data-book-height", "2.200");
-  await expect(scene).toHaveAttribute("data-book-scale", "2.050");
+  await expect(scene).toHaveAttribute("data-book-scale", "1.450");
   await expect(scene).toHaveAttribute("data-hinge", "3.094");
 });
 

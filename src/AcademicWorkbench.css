@@ -190,7 +190,7 @@
 
 /* Transparent page regions follow the same projection as the physical book. */
 .academic-book.is-open { pointer-events: none; }
-.academic-page-hit { position: absolute; z-index: 5; transform: translate(-50%, -50%); padding: 0; border: 0; background: transparent; color: #f27687; cursor: pointer; touch-action: pan-y; }
+.academic-page-hit { position: absolute; z-index: 5; transform: translate(-50%, -50%); padding: 0; border: 0; background: transparent; color: #f27687; cursor: pointer; touch-action: auto; }
 .academic-page-hit-left { left: 27%; top: 50%; width: 38%; height: 60%; }
 .academic-page-hit-right { left: 73%; top: 50%; width: 38%; height: 60%; }
 .academic-page-hit:disabled { cursor: default; }
