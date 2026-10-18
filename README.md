@@ -16,11 +16,11 @@ Original photographs (`photo/` and `scripts/assets/`), private reference documen
 
 ## English and Simplified Chinese
 
-Use the **中文 / EN** button in the header to switch languages without leaving the current chapter. The selection is saved locally when browser storage is available. Share `/?lang=zh` for Simplified Chinese or `/?lang=en` for English; an explicit URL selection takes priority over the saved preference. English remains the fallback for first-time visits without an explicit language. Language selection preserves other query parameters and section anchors.
+Use the **中文 / EN** button in the header to switch languages without leaving the current chapter. Share `/?lang=zh` for Simplified Chinese or `/?lang=en` for English. Links without a valid language selection always open in English, regardless of browser language or previously saved preferences. Language selection stays in the URL across reloads and preserves other query parameters and section anchors.
 
-`src/i18n.tsx` provides the shared language state, updates the document language, title, and description, and handles URL selection and persistence. Keep English source copy in `src/content.ts` and the corresponding components, and maintain its Chinese translations in `src/locales/zh.json`. Use `useLanguage().t` for visitor-facing copy, including accessibility labels, image descriptions, control states, and meaningful 3D book text. Update source strings and translation keys together whenever copy changes. Both languages must receive content and feature updates in the same task, as required by `AGENTS.md`.
+`src/i18n.tsx` provides the shared language state, updates the document language, title, and description, and handles URL selection. Keep English source copy in `src/content.ts` and the corresponding components, and maintain its Chinese translations in `src/locales/zh.json`. Use `useLanguage().t` for visitor-facing copy, including accessibility labels, image descriptions, control states, and meaningful 3D book text. Update source strings and translation keys together whenever copy changes. Both languages must receive content and feature updates in the same task, as required by `AGENTS.md`.
 
-Run `npm run build` and `npx playwright test tests/language.spec.ts` to verify language switching, persistence, shared links, localized metadata, interactive content, and responsive layouts. The language tests save Chinese previews to `artifacts/chinese-{width}.png`.
+Run `npm run build` and `npx playwright test tests/language.spec.ts` to verify the English default, language switching, shared links, localized metadata, interactive content, and responsive layouts. The language tests save Chinese previews to `artifacts/chinese-{width}.png`.
 
 ## 本地运行
 

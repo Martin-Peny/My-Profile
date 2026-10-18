@@ -31,23 +31,48 @@ test("keyboard switching translates content, metadata, and accessible controls",
   expect(errors).toEqual([]);
 });
 
-test("language links override saved preferences and preserve other query parameters and anchors", async ({ page }) => {
+test("language links select the language and preserve other query parameters and anchors", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/?lang=zh&view=profile#explore");
   await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
   await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await page.goto("/?lang=en&view=profile#explore");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await page.getByRole("button", { name: "切换为中文" }).click();
   await expect(page).toHaveURL(/\?lang=zh&view=profile#explore$/);
   await page.goto("/");
-  await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
   await page.goto("/?lang=invalid");
-  await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
+  await expect(page.locator("html")).toHaveAttribute("lang", "en");
 });
+
+for (const width of [390, 1440]) {
+  test(`ordinary links default to English despite a Chinese browser and saved preference (${width}px)`, async ({ browser }) => {
+    const context = await browser.newContext({ locale: "zh-CN", viewport: { width, height: 900 }, reducedMotion: "reduce" });
+    await context.addInitScript(() => localStorage.setItem("haoyang-language", "zh"));
+    const page = await context.newPage();
+    try {
+      await page.goto("/?view=profile#explore");
+      await expect(page.locator("html")).toHaveAttribute("lang", "en");
+      await expect(page).toHaveTitle("Haoyang Lin — Enter the Frequency");
+      await expect(page.locator(".profile-card h3")).toHaveText(["Introduction", "My life", "Academic Experience"]);
+      await page.getByRole("button", { name: "切换为中文" }).click();
+      await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
+      await expect(page).toHaveURL(/\?view=profile&lang=zh#explore$/);
+      await page.reload();
+      await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
+      await page.goto("/");
+      await expect(page.locator("html")).toHaveAttribute("lang", "en");
+      await page.goBack();
+      await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
+    } finally {
+      await context.close();
+    }
+  });
+}
 
 test("Chinese layouts, navigation, images, and book content work on mobile and desktop", async ({ page }) => {
   test.setTimeout(90_000);
