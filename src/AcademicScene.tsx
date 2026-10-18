@@ -213,7 +213,7 @@ export default function AcademicScene({ open, spread, hovered, propHovered, targ
     let lastTime = 0;
     let frames = 0;
     let renderSize = 0;
-    let openScale = 2.05;
+    let openScale = 2.35;
     const canvasScale = 1.5;
     const canvasMargin = (canvasScale - 1) / 2;
     const cleanups: Array<() => void> = [];
@@ -290,7 +290,7 @@ export default function AcademicScene({ open, spread, hovered, propHovered, targ
       };
       pageRegion("previousPage", -4.55, -1.8, -1.95, 2.05, .77);
       pageRegion("nextPage", -1.35, 1.35, -1.6, 2.05, .52);
-      pageRegion("bookClose", .65, 1.32, -2.1, -1.8, .72);
+      pageRegion("bookClose", .7, 1.4, -2.16, -1.82, inputs.current.spread === 0 ? .505 : .458);
     };
 
     const pause = () => {
@@ -338,7 +338,7 @@ export default function AcademicScene({ open, spread, hovered, propHovered, targ
       if (!renderer) return;
       const rect = host.getBoundingClientRect();
       const size = Math.max(1, Math.min(rect.width, rect.height));
-      openScale = THREE.MathUtils.clamp(1.45 * (window.innerWidth - 48) / (size * .86), 1.45, 2.05);
+      openScale = THREE.MathUtils.clamp(1.45 * (window.innerWidth - 32) / (size * .92), 1.45, 2.35);
       if (size !== renderSize) {
         renderSize = size;
         // Extend the camera's original view rather than enlarging the desk with the canvas.
@@ -406,6 +406,7 @@ export default function AcademicScene({ open, spread, hovered, propHovered, targ
     nearObserver.observe(host);
     visibilityObserver.observe(host);
     sizeObserver.observe(host);
+    window.addEventListener("resize", resize);
     const visibility = () => { if (document.hidden) pause(); else invalidate(); };
     document.addEventListener("visibilitychange", visibility);
     motion.addEventListener("change", invalidate);
@@ -413,6 +414,7 @@ export default function AcademicScene({ open, spread, hovered, propHovered, targ
       disposed = true;
       pause();
       nearObserver.disconnect(); visibilityObserver.disconnect(); sizeObserver.disconnect();
+      window.removeEventListener("resize", resize);
       document.removeEventListener("visibilitychange", visibility);
       motion.removeEventListener("change", invalidate);
       invalidateRef.current = () => {};

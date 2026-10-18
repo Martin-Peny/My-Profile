@@ -12,43 +12,17 @@ export default function AcademicWorkbench() {
   const [propHovered, setPropHovered] = useState<DeskProp | null>(null);
   const [sceneReady, setSceneReady] = useState(false);
   const targets = useRef<Record<AcademicTarget, HTMLElement | null>>({ book: null, microphone: null, headphones: null, previousPage: null, nextPage: null, bookClose: null });
-  const viewportRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!bookOpen) return;
-    let frame = 0;
-    let previousBounds: number[] | undefined;
-    const frameBook = () => {
-      const viewport = viewportRef.current;
-      const book = targets.current.book;
-      if (!viewport || !book) return;
-      const scene = viewport.querySelector<HTMLElement>(".academic-scene");
-      if (sceneReady && (scene?.dataset.open !== "true" || !["idle", "static"].includes(scene.dataset.motion ?? ""))) {
-        frame = requestAnimationFrame(frameBook);
-        return;
-      }
-      const bounds = book.getBoundingClientRect();
-      const view = viewport.getBoundingClientRect();
-      const left = bounds.left - view.left + viewport.scrollLeft;
-      const top = bounds.top - view.top + viewport.scrollTop;
-      const currentBounds = [left, top, bounds.width, bounds.height];
-      // ResizeObserver can update the projection after the first settled render.
-      if (!previousBounds || currentBounds.some((value, index) => Math.abs(value - previousBounds![index]!) > .5)) {
-        previousBounds = currentBounds;
-        frame = requestAnimationFrame(frameBook);
-        return;
-      }
-      viewport.scrollTo({ left: left - 24, top: top - 24 });
-    };
-    frame = requestAnimationFrame(() => { frame = requestAnimationFrame(frameBook); });
+    const frame = requestAnimationFrame(() => targets.current.bookClose?.focus({ preventScroll: true }));
     return () => cancelAnimationFrame(frame);
-  }, [bookOpen, sceneReady]);
+  }, [bookOpen]);
 
   function closeBook() {
     setBookOpen(false);
     requestAnimationFrame(() => {
       targets.current.book?.focus({ preventScroll: true });
-      targets.current.book?.scrollIntoView({ block: "center", behavior: "instant" });
     });
   }
 
@@ -76,9 +50,6 @@ export default function AcademicWorkbench() {
         </p>
       </div>
 
-      <div className={`academic-book-viewport ${bookOpen ? "is-zoomed" : ""}`} ref={viewportRef}
-        tabIndex={bookOpen ? 0 : undefined} role={bookOpen ? "region" : undefined}
-        aria-label={bookOpen ? t("Enlarged book. Scroll horizontally and vertically to read the pages.") : undefined}>
       <div className="academic-stage" aria-label={t("Interactive academic workbench")} data-scene-ready={sceneReady}
         onKeyDown={event => {
           if (!bookOpen) return;
@@ -164,7 +135,7 @@ export default function AcademicWorkbench() {
         </button>
         <button className="academic-inbook-close" type="button"
           ref={node => { targets.current.bookClose = node; }} hidden={!bookOpen}
-          aria-label={t("Close academic book")} onClick={closeBook}>{t("close")}</button>
+          aria-label={t("Close academic book")} onClick={closeBook}><span className="academic-close-fallback">{t("close")}</span></button>
         <p className="sr-only" aria-live="polite">{bookOpen && t(spread === 0 ? "SPREAD 01 / 02 · BACKGROUND & INTERESTS" : "SPREAD 02 / 02 · RESEARCH & EXPERIENCE")}</p>
         <span className="academic-stage-cross cross-one" aria-hidden="true">+</span>
         <span className="academic-stage-cross cross-two" aria-hidden="true">+</span>
@@ -176,7 +147,6 @@ export default function AcademicWorkbench() {
         hidden={!bookOpen}
       >
         <AcademicPages spread={spread} />
-      </div>
       </div>
       </div>
     </section>

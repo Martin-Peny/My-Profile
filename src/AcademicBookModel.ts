@@ -101,6 +101,21 @@ function notebookTexture(page: number, t: Translate) {
     ctx.fillStyle = "#dc7e8b";
     ctx.font = '400 22px "IBM Plex Mono", sans-serif';
     ctx.fillText(t("HAOYANG LIN / FIELD NOTES"), 105, 110);
+    if (page % 2 === 1) {
+      // Print the control on the paper so it shares the page's perspective, grain, and light.
+      ctx.save();
+      ctx.textAlign = "right";
+      ctx.font = '400 34px "IBM Plex Mono", "Microsoft YaHei", sans-serif';
+      ctx.fillStyle = "#dc7e8b";
+      const label = t("close");
+      ctx.fillText(label, 1335, 114);
+      ctx.strokeStyle = "#87505b";
+      ctx.beginPath();
+      ctx.moveTo(1335 - ctx.measureText(label).width, 127);
+      ctx.lineTo(1335, 127);
+      ctx.stroke();
+      ctx.restore();
+    }
     const headings = ["Education", "Research Interests", "Research Projects", "Professional Experience"];
     type Line = { text: string; y: number; size: number; weight: number; color: string };
     const lines: Line[] = [];
@@ -268,7 +283,7 @@ export function createAcademicBook(t: Translate) {
   return {
     model,
     shadow: contact,
-    update(open: boolean, hovered: boolean, reduced: boolean, dt: number, openScale = 2.05, spread = 0) {
+    update(open: boolean, hovered: boolean, reduced: boolean, dt: number, openScale = 2.35, spread = 0) {
       // A reversible 1.9-second journey: leave the desk, grow toward the reader, then unfold.
       const target = open ? 1 : 0;
       progress = reduced ? target : THREE.MathUtils.clamp(progress + (open ? dt : -dt) / 1.9, 0, 1);

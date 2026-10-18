@@ -1,6 +1,17 @@
-import { expect, test } from "@playwright/test";
+import { expect, test, type Locator } from "@playwright/test";
 import { academicNotebook } from "../src/content";
 import chinese from "../src/locales/zh.json" with { type: "json" };
+
+function stageGeometry(stage: Locator) {
+  return stage.evaluate(el => ({
+    width: el.clientWidth,
+    height: el.clientHeight,
+    left: (el as HTMLElement).offsetLeft,
+    top: (el as HTMLElement).offsetTop,
+    canvasWidth: el.querySelector("canvas")?.style.width,
+    props: Array.from(el.querySelectorAll<HTMLElement>(".academic-prop"), prop => [prop.style.left, prop.style.top, prop.style.width, prop.style.height]),
+  }));
+}
 
 test("physical book opens on its hinge, responds to hover and keyboard, and sleeps when settled", async ({ page }) => {
   const errors: string[] = [];
@@ -16,6 +27,7 @@ test("physical book opens on its hinge, responds to hover and keyboard, and slee
   await expect(scene).toHaveAttribute("data-hinge", "0.000");
   await page.mouse.move(10, 10);
   await expect(scene).toHaveAttribute("data-motion", "idle");
+  const originalStage = await stageGeometry(stage);
   const frames = await scene.getAttribute("data-frames");
   await page.waitForTimeout(300);
   expect(await scene.getAttribute("data-frames")).toBe(frames);
@@ -28,14 +40,21 @@ test("physical book opens on its hinge, responds to hover and keyboard, and slee
   await expect(button).toHaveAttribute("aria-expanded", "true");
   await expect.poll(async () => Number(await scene.getAttribute("data-book-height"))).toBeGreaterThan(.3);
   expect(Number(await scene.getAttribute("data-book-height"))).toBeLessThan(2.2);
-  expect(Number(await scene.getAttribute("data-book-scale"))).toBeLessThan(1.45);
+  expect(Number(await scene.getAttribute("data-book-scale"))).toBeLessThan(2.35);
+  expect(await stageGeometry(stage)).toEqual(originalStage);
   await expect.poll(async () => Number(await scene.getAttribute("data-hinge"))).toBeGreaterThan(3);
   await expect(page.locator(".academic-book-content")).toHaveCount(0);
   await expect(page.locator("#academic-book-content")).toHaveClass("sr-only");
   await expect(scene).toHaveAttribute("data-motion", "idle");
   await expect(scene).toHaveAttribute("data-book-height", "2.200");
-  await expect(scene).toHaveAttribute("data-book-scale", "1.450");
-  await page.locator(".academic-book-viewport").screenshot({ path: "artifacts/academic-book-3d-open.png", style: ".background-music { visibility: hidden !important; }" });
+  expect(Number(await scene.getAttribute("data-book-scale"))).toBeGreaterThan(1.9);
+  const close = page.locator(".academic-inbook-close");
+  await expect(close).toBeFocused();
+  await expect(close.locator(".academic-close-fallback")).toHaveCSS("visibility", "hidden");
+  expect((await close.boundingBox())!.width).toBeGreaterThanOrEqual(44);
+  expect((await close.boundingBox())!.height).toBeGreaterThanOrEqual(44);
+  expect(await stageGeometry(stage)).toEqual(originalStage);
+  await page.locator(".academic-workbench").screenshot({ path: "artifacts/academic-book-3d-open.png", style: ".background-music { visibility: hidden !important; }" });
   await page.locator(".academic-inbook-close").click();
   await expect(button).toBeFocused();
   await expect(button).toHaveAttribute("aria-expanded", "false");
@@ -52,7 +71,7 @@ for (const language of ["en", "zh"]) {
     test.setTimeout(90_000);
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto(`/?lang=${language}`);
-    for (const width of [320, 390, 768, 1440]) {
+    for (const width of [320, 390, 768, 1440, 1920]) {
       await page.setViewportSize({ width, height: 1000 });
       const stage = page.locator(".academic-stage");
       const scene = page.locator(".academic-scene");
@@ -62,6 +81,7 @@ for (const language of ["en", "zh"]) {
       await expect(scene).toHaveAttribute("data-book-scale", "1.000");
       const stageBox = (await stage.boundingBox())!;
       const bookBox = (await book.boundingBox())!;
+      const originalStage = await stageGeometry(stage);
       expect(Math.abs(stageBox.width - stageBox.height)).toBeLessThan(1);
       expect(bookBox.width / stageBox.width).toBeLessThan(.33);
       expect(bookBox.height).toBeGreaterThan(bookBox.width);
@@ -74,25 +94,31 @@ for (const language of ["en", "zh"]) {
       await expect(scene).toHaveAttribute("data-motion", "static");
       const openBox = (await book.boundingBox())!;
       expect(openBox.width).toBeGreaterThan(bookBox.width * 2);
-      const viewport = page.locator(".academic-book-viewport");
-      await expect(viewport).toHaveClass(/is-zoomed/);
-      await expect.poll(async () => {
-        const bookBounds = (await book.boundingBox())!;
-        const viewBounds = (await viewport.boundingBox())!;
-        return Math.abs(bookBounds.x - viewBounds.x - 24) + Math.abs(bookBounds.y - viewBounds.y - 24);
-      }).toBeLessThan(3);
-      expect(openBox.width).toBeGreaterThan(width);
-      expect(await viewport.evaluate(el => el.scrollWidth > el.clientWidth)).toBe(true);
+      expect(await stageGeometry(stage)).toEqual(originalStage);
+      await expect(page.locator(".academic-book-viewport")).toHaveCount(0);
+      await expect(stage).toHaveCSS("overflow", "visible");
+      expect(openBox.x).toBeGreaterThanOrEqual(0);
+      expect(openBox.x + openBox.width).toBeLessThanOrEqual(width);
+      if (width === 1440) {
+        expect(openBox.x).toBeLessThan(stageBox.x);
+        expect(openBox.x + openBox.width).toBeGreaterThan(stageBox.x + stageBox.width);
+        expect(openBox.width).toBeLessThan(stageBox.width * 1.3);
+      }
+      if (width === 1920) {
+        await expect(scene).toHaveAttribute("data-book-scale", "2.350");
+        expect(openBox.width).toBeGreaterThan(stageBox.width * 1.3);
+        expect(openBox.width).toBeLessThan(stageBox.width * 1.5);
+      }
       await expect(page.locator(".academic-book-content")).toHaveCount(0);
       expect((await page.locator("#academic-book-content").boundingBox())!.height).toBeLessThanOrEqual(1);
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
       await page.locator(".academic-page-hit-right").click();
       await expect(scene).toHaveAttribute("data-page-turn", "3.142");
       await expect(page.locator(".academic-reader-page h3")).toHaveText(language === "zh" ? ["研究项目", "实践经历"] : ["Research Projects", "Professional Experience"]);
-      await viewport.screenshot({ path: `artifacts/academic-book-second-${language}-${width}.png`, style: ".background-music { visibility: hidden !important; }" });
+      await page.locator(".academic-workbench").screenshot({ path: `artifacts/academic-book-second-${language}-${width}.png`, style: ".background-music { visibility: hidden !important; }" });
       await page.locator(".academic-page-hit-left").click();
       await expect(scene).toHaveAttribute("data-page-turn", "0.000");
-      await viewport.screenshot({ path: `artifacts/academic-book-3d-open-${language}-${width}.png`, style: ".background-music { visibility: hidden !important; }" });
+      await page.locator(".academic-workbench").screenshot({ path: `artifacts/academic-book-3d-open-${language}-${width}.png`, style: ".background-music { visibility: hidden !important; }" });
       await page.locator(".academic-inbook-close").click();
       await expect(book).toHaveAttribute("aria-expanded", "false");
       await expect(scene).toHaveAttribute("data-hinge", "0.000");
@@ -101,6 +127,7 @@ for (const language of ["en", "zh"]) {
       await page.mouse.move(10, 10);
       await expect(scene).toHaveAttribute("data-book-height", "0.100");
       expect((await book.boundingBox())!.width).toBeCloseTo(bookBox.width, 0);
+      expect(await stageGeometry(stage)).toEqual(originalStage);
     }
   });
 }
@@ -154,7 +181,7 @@ test("book reverses its flight and responds immediately to a changed motion pref
   await page.emulateMedia({ reducedMotion: "reduce" });
   await expect(scene).toHaveAttribute("data-motion", "static");
   await expect(scene).toHaveAttribute("data-book-height", "2.200");
-  await expect(scene).toHaveAttribute("data-book-scale", "1.450");
+  expect(Number(await scene.getAttribute("data-book-scale"))).toBeGreaterThan(1.9);
   await expect(scene).toHaveAttribute("data-hinge", "3.094");
 });
 
@@ -203,7 +230,9 @@ for (const language of ["en", "zh"] as const) {
           if (!printed) { printed = { text: [], right: 0, bottom: 0 }; pages.push(printed); canvases.set(this.canvas, printed); }
           const matrix = this.getTransform();
           printed.text.push(args[0]);
-          printed.right = Math.max(printed.right, matrix.e + (args[1] + this.measureText(args[0]).width) * matrix.a);
+          const width = this.measureText(args[0]).width;
+          const right = args[1] + (this.textAlign === "right" || this.textAlign === "end" ? 0 : this.textAlign === "center" ? width / 2 : width);
+          printed.right = Math.max(printed.right, matrix.e + right * matrix.a);
           printed.bottom = Math.max(printed.bottom, matrix.f + args[2] * matrix.d);
         }
         return original.apply(this, args);
@@ -215,6 +244,7 @@ for (const language of ["en", "zh"] as const) {
     await expect(page.locator(".academic-stage")).toHaveAttribute("data-scene-ready", "true");
     const printed = await page.evaluate(() => (window as unknown as { notebookPrints: { text: string[]; right: number; bottom: number }[] }).notebookPrints);
     expect(printed).toHaveLength(4);
+    for (const index of [1, 3]) expect(printed[index].text).toContain(language === "zh" ? "关闭" : "close");
     const { education, skills, interests, projects, experience } = academicNotebook;
     const expected = [
       ["Education", ...Object.values(education), "Skills", ...skills.flatMap(skill => [skill.title, skill.description, ...(skill.note ? [skill.note] : [])])],
