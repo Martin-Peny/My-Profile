@@ -295,9 +295,6 @@ button {
   gap: 10px;
   color: #d4d4cf;
 }
-.hero-meta > span:last-child {
-  font-size: 9px;
-}
 .hero-main {
   flex: 1;
   min-height: 0;
@@ -1509,9 +1506,6 @@ h1 > span {
   .hero-bottom > .micro {
     font-size: 8px;
   }
-  .hero-coordinates {
-    display: none;
-  }
   .eyebrow {
     font-size: 9px;
     gap: 8px;
@@ -1653,9 +1647,6 @@ h1 > span {
     padding: 16px 5% 0;
     font-size: 7px;
     letter-spacing: 0.3px;
-  }
-  .hero-meta > span:last-child {
-    font-size: 7px;
   }
   .hero-main {
     padding: clamp(16px, 3dvh, 42px) 5% 0;
@@ -1970,9 +1961,6 @@ h1 > span {
 @media (max-width: 374px) {
   h1 {
     font-size: 15.2vw;
-  }
-  .hero-meta > span:last-child {
-    display: none;
   }
   .section-heading h2 {
     font-size: 65px;

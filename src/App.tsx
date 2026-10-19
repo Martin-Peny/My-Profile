@@ -24,20 +24,19 @@ function App() {
   const [musicPlaying, setMusicPlaying] = useState(false);
 
   useEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("main section[id]"));
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            setActiveSection(id === "academic-experience" ? "introduction" : id);
-          }
+      () => {
+        const visibleSections = sections.filter((section) => {
+          const bounds = section.getBoundingClientRect();
+          return bounds.top < window.innerHeight * 0.45 && bounds.bottom > window.innerHeight * 0.2;
         });
+        const id = visibleSections.at(-1)?.id;
+        if (id) setActiveSection(id === "explore" ? "index" : id);
       },
       { rootMargin: "-20% 0px -55% 0px", threshold: 0 },
     );
-    document
-      .querySelectorAll("main > section[id]")
-      .forEach((section) => observer.observe(section));
+    sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
 
@@ -84,9 +83,10 @@ function App() {
           aria-label={t("Main navigation")}
         >
           {[
-            ["index", "INDEX", "01"],
-            ["explore", "EXPLORE", "02"],
-            ["introduction", "INTRODUCTION", "03"],
+            ["index", "HOME", "01"],
+            ["introduction", "INTRODUCTION", "02"],
+            ["my-life", "MY LIFE", "03"],
+            ["academic-experience", "ACADEMIC", "04"],
           ].map(([id, title, index]) => (
             <a
               key={id}
@@ -142,19 +142,14 @@ function App() {
           <div className="hero-meta micro">
             <span>
               <i className="status-dot" />
-              {t("INDEPENDENT FREQUENCY")}
+              {t("PASSION INTO PURPOSE.")}
             </span>
-            <span className="hero-coordinates">
-              {t("HL—001 / AUDIO EXPLORATIONS")}
-            </span>
-            <span>{t("VOLUME UP. WORLD OFF.")}</span>
           </div>
           <div className="hero-main">
             <div className="hero-copy">
               <div className="eyebrow micro">
                 <span className="crosshair">+</span>
-                {t(artist.name).toUpperCase()}{" "}
-                <span className="muted">/ {t(artist.role).toUpperCase()}</span>
+                {t(artist.name).toUpperCase()}
               </div>
               <h1 id="hero-title" aria-label={t("I AM, HAOYANG LING")}>
                 <span className="hero-title-line hero-title-intro">{t("I AM")}<span className="hero-title-comma">{locale === "zh" ? "，" : ","}</span></span>

@@ -27,7 +27,7 @@ test("background track plays on request, pauses, resumes, loops, and survives na
   await expect(volume).toHaveValue("36");
   expect(await audio.evaluate((element: HTMLAudioElement) => element.volume)).toBeCloseTo(0.36);
 
-  await page.getByRole("link", { name: "02 EXPLORE" }).click();
+  await page.getByRole("link", { name: "EXPLORE MY STORY" }).click();
   await expect(page).toHaveURL(/#explore$/);
   expect(await audio.evaluate((element: HTMLAudioElement) => element.paused)).toBe(false);
   const pause = page.getByRole("button", { name: "Pause background music" });
@@ -97,7 +97,7 @@ test("music controls remain usable on mobile and desktop", async ({ page }) => {
   }
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole("button", { name: "Open navigation" }).click();
-  await page.getByRole("link", { name: "03 INTRODUCTION" }).click();
+  await page.getByRole("link", { name: "02 INTRODUCTION" }).click();
   await expect(page.getByRole("button", { name: "Pause background music" })).toBeVisible();
   await page.getByRole("button", { name: "Pause background music" }).click();
   await page.locator(".site-footer").getByRole("link", { name: "BACK TO EXPLORE", exact: true }).click();

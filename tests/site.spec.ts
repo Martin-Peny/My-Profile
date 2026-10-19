@@ -30,7 +30,7 @@ test("desktop renders, anchors resolve, and the artist identity stays correct", 
       ),
   ).toBe(true);
   await page.screenshot({ path: "artifacts/desktop.png", fullPage: true });
-  await page.getByRole("link", { name: "02 EXPLORE" }).click();
+  await page.getByRole("link", { name: "EXPLORE MY STORY" }).click();
   await expect(page).toHaveURL(/#explore$/);
   expect(errors).toEqual([]);
 });
@@ -44,7 +44,7 @@ test("profile cards navigate as whole links with keyboard access and unobscured 
   await page.evaluate(() => document.fonts.ready);
   const targets = ["introduction", "my-life", "academic-experience"];
   expect(await page.locator("main").innerText()).not.toMatch(/[\u3400-\u9fff]/);
-  await expect(page.locator(".profile-card h3")).toHaveText(["Introduction", "My life", "Academic Experience"]);
+  await expect(page.locator(".profile-card h3")).toHaveText(["Introduction", "My life", "Academic"]);
   await expect(page.locator("#sound-console, .audio-console, .study-card")).toHaveCount(0);
   await expect(page.locator(".profile-card button, .profile-card a")).toHaveCount(0);
   await expect(page.locator(".academic-workbench")).toHaveCount(1);
@@ -104,7 +104,7 @@ test("mobile navigation, focus, layouts, and reduced motion work", async ({
     page.getByRole("button", { name: "Open navigation" }),
   ).toBeFocused();
   await page.getByRole("button", { name: "Open navigation" }).click();
-  await page.getByRole("link", { name: "03 INTRODUCTION" }).click();
+  await page.getByRole("link", { name: "02 INTRODUCTION" }).click();
   await expect(page).toHaveURL(/#introduction$/);
   await expect(page.getByRole("navigation", { name: "Main navigation" })).toBeHidden();
   await page.goto("/");

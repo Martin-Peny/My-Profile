@@ -152,7 +152,7 @@ export const profileSections = [
   {
     id: "academic-experience",
     index: "03",
-    title: "Academic Experience",
+    title: "Academic",
     label: "ACADEMIC PATH",
     subtitle: "STUDY / KNOWLEDGE / EXPLORATION",
     description: "Explore the academic side of the story.",

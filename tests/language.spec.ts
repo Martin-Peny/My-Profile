@@ -11,7 +11,10 @@ test("keyboard switching translates content, metadata, and accessible controls",
   await expect(page.locator(".brand")).toHaveAccessibleName("Haoyang Ling, home");
   await expect(page.locator(".brand")).toContainText("LING");
   await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /Haoyang Ling/);
-  await expect(page.locator(".profile-card h3")).toHaveText(["Introduction", "My life", "Academic Experience"]);
+  await expect(page.locator(".profile-card h3")).toHaveText(["Introduction", "My life", "Academic"]);
+  await expect(page.locator(".hero-meta")).toHaveText("PASSION INTO PURPOSE.");
+  await expect(page.locator(".hero .eyebrow")).toHaveText("+Haoyang Ling", { ignoreCase: true });
+  await expect(page.locator(".main-nav > a")).toHaveText(["01HOME", "02INTRODUCTION", "03MY LIFE", "04ACADEMIC"]);
   const switcher = page.getByRole("button", { name: "切换为中文" });
   await switcher.focus();
   await page.keyboard.press("Enter");
@@ -19,7 +22,9 @@ test("keyboard switching translates content, metadata, and accessible controls",
   await expect(page).toHaveTitle("凌浩洋 — 走进我的频率");
   await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /凌浩洋/);
   await expect(page.getByRole("heading", { level: 1 })).toHaveAccessibleName("我是，凌浩洋");
-  await expect(page.locator(".profile-card h3")).toHaveText(["个人介绍", "我的生活", "学术经历"]);
+  await expect(page.locator(".profile-card h3")).toHaveText(["个人介绍", "我的生活", "学术"]);
+  await expect(page.locator(".hero-meta")).toHaveText("让热爱成就意义。");
+  await expect(page.locator(".main-nav > a")).toHaveText(["01首页", "02个人介绍", "03我的生活", "04学术"]);
   await expect(page.locator(".about-me")).toHaveAttribute("lang", "zh-CN");
   await expect(page.locator(".about-me p").first()).toContainText("国际经济与贸易");
   await expect(page.locator(".my-life-copy")).toContainText("2022–2023");
@@ -93,7 +98,7 @@ for (const width of [390, 1440]) {
       await page.goto("/?view=profile#explore");
       await expect(page.locator("html")).toHaveAttribute("lang", "en");
       await expect(page).toHaveTitle("Haoyang Ling — Enter the Frequency");
-      await expect(page.locator(".profile-card h3")).toHaveText(["Introduction", "My life", "Academic Experience"]);
+      await expect(page.locator(".profile-card h3")).toHaveText(["Introduction", "My life", "Academic"]);
       await page.getByRole("button", { name: "切换为中文" }).click();
       await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
       await expect(page).toHaveURL(/\?view=profile&lang=zh#explore$/);
@@ -133,6 +138,16 @@ test("Chinese layouts, navigation, images, and book content work on mobile and d
       await expect(page.getByRole("navigation", { name: "主导航" })).toBeVisible();
       await page.keyboard.press("Escape");
       await expect(page.getByRole("button", { name: "打开导航" })).toBeFocused();
+    }
+    await expect(page.locator(".hero-meta > span")).toBeVisible();
+    for (const id of ["academic-experience", "my-life", "introduction", "index"]) {
+      if (width <= 760) await page.getByRole("button", { name: "打开导航" }).click();
+      const link = page.locator(`.main-nav > a[href="#${id}"]`);
+      await link.focus();
+      await page.keyboard.press("Enter");
+      await expect(page).toHaveURL(new RegExp(`#${id}$`));
+      await expect(link).toHaveAttribute("aria-current", "location");
+      if (width <= 760) await expect(page.locator(".main-nav")).toBeHidden();
     }
     for (const id of ["introduction", "my-life", "academic-experience"]) {
       const card = page.locator(`.profile-card[href="#${id}"]`);
