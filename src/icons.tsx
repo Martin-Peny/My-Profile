@@ -35,6 +35,24 @@ export function Mark({ className = "" }: { className?: string }) {
     />
   );
 }
+export function Asterisk({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={`decorative-asterisk ${className}`}
+      viewBox="0 0 32 32"
+      width="0.8em"
+      height="0.8em"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M16 2v28M2 16h28M6.1 6.1l19.8 19.8M6.1 25.9 25.9 6.1" />
+    </svg>
+  );
+}
+
 export function SoundIcon() {
   return (
     <svg

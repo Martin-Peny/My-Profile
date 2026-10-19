@@ -80,7 +80,7 @@ function coverTexture(t: Translate) {
     ctx.restore();
     ctx.fillStyle = "#bc7377";
     ctx.font = '400 19px "IBM Plex Mono", monospace';
-    ctx.fillText(t("HAOYANG LIN"), 109, 945);
+    ctx.fillText(t("HAOYANG LING"), 109, 945);
     ctx.font = '400 14px "IBM Plex Mono", monospace';
     ctx.fillStyle = "#895057";
     ctx.fillText(t("QUESTIONS / METHODS / EXPLORATION"), 109, 978);
@@ -100,7 +100,7 @@ function notebookTexture(page: number, t: Translate) {
     ctx.strokeRect(50, 48, 1340, 1944);
     ctx.fillStyle = "#dc7e8b";
     ctx.font = '400 22px "IBM Plex Mono", sans-serif';
-    ctx.fillText(t("HAOYANG LIN / FIELD NOTES"), 105, 110);
+    ctx.fillText(t("HAOYANG LING / FIELD NOTES"), 105, 110);
     if (page % 2 === 1) {
       // Print the control on the paper so it shares the page's perspective, grain, and light.
       ctx.save();

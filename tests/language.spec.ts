@@ -7,6 +7,10 @@ test("keyboard switching translates content, metadata, and accessible controls",
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveAccessibleName("I AM, HAOYANG LING");
+  await expect(page.locator(".brand")).toHaveAccessibleName("Haoyang Ling, home");
+  await expect(page.locator(".brand")).toContainText("LING");
+  await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /Haoyang Ling/);
   await expect(page.locator(".profile-card h3")).toHaveText(["Introduction", "My life", "Academic Experience"]);
   const switcher = page.getByRole("button", { name: "切换为中文" });
   await switcher.focus();
@@ -26,7 +30,7 @@ test("keyboard switching translates content, metadata, and accessible controls",
   await expect(page.getByRole("button", { name: "Switch to English" })).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page).toHaveTitle("Haoyang Lin — Enter the Frequency");
+  await expect(page).toHaveTitle("Haoyang Ling — Enter the Frequency");
   await expect(page.locator(".about-me")).toHaveAttribute("lang", "en");
   expect(errors).toEqual([]);
 });
@@ -50,6 +54,37 @@ test("language links select the language and preserve other query parameters and
 });
 
 for (const width of [390, 1440]) {
+  test(`ticker copy and monochrome asterisks stay consistent across languages (${width}px)`, async ({ browser }) => {
+    const context = await browser.newContext({
+      viewport: { width, height: 900 }, reducedMotion: "reduce",
+      isMobile: width === 390, hasTouch: width === 390,
+    });
+    const page = await context.newPage();
+    try {
+      await page.goto("/?lang=en#introduction");
+      await page.evaluate(() => document.fonts.ready);
+      const ticker = page.locator(".signal-ticker").first();
+      const phrase = ticker.locator(".ticker-phrase").first();
+      await expect(phrase).toHaveText("IDEAS INTO ACTION. PASSION INTO PURPOSE.↗↗HAOYANG LING");
+      await expect(ticker.locator("svg.ticker-star")).toHaveCount(8);
+      expect(await ticker.locator(".ticker-star").evaluateAll(stars => stars.every(star => {
+        const bounds = star.getBoundingClientRect();
+        return star.namespaceURI === "http://www.w3.org/2000/svg" &&
+          star.textContent === "" && getComputedStyle(star).stroke === getComputedStyle(star.parentElement!).color &&
+          bounds.width > 0 && bounds.width === bounds.height;
+      }))).toBe(true);
+      await ticker.screenshot({ path: `artifacts/ticker-en-${width}.png` });
+      await page.getByRole("button", { name: "切换为中文" }).click();
+      await expect(phrase).toHaveText("让想法付诸行动。 让热爱成就意义。↗↗凌浩洋");
+      await expect(page).toHaveURL(/lang=zh#introduction$/);
+      await expect(ticker.locator("svg.ticker-star")).toHaveCount(8);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      await ticker.screenshot({ path: `artifacts/ticker-zh-${width}.png` });
+    } finally {
+      await context.close();
+    }
+  });
+
   test(`ordinary links default to English despite a Chinese browser and saved preference (${width}px)`, async ({ browser }) => {
     const context = await browser.newContext({ locale: "zh-CN", viewport: { width, height: 900 }, reducedMotion: "reduce" });
     await context.addInitScript(() => localStorage.setItem("haoyang-language", "zh"));
@@ -57,7 +92,7 @@ for (const width of [390, 1440]) {
     try {
       await page.goto("/?view=profile#explore");
       await expect(page.locator("html")).toHaveAttribute("lang", "en");
-      await expect(page).toHaveTitle("Haoyang Lin — Enter the Frequency");
+      await expect(page).toHaveTitle("Haoyang Ling — Enter the Frequency");
       await expect(page.locator(".profile-card h3")).toHaveText(["Introduction", "My life", "Academic Experience"]);
       await page.getByRole("button", { name: "切换为中文" }).click();
       await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");

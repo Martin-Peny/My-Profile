@@ -10,7 +10,7 @@ export default function GalleryContentSpace({ children }: { children?: ReactNode
       <div className="gallery-content-body">
         <HalftoneReveal
           src="/images/about-portrait.webp"
-          alt={t("Portrait of Haoyang Lin wearing glasses and dangling earrings.")}
+          alt={t("Portrait of Haoyang Ling wearing glasses and dangling earrings.")}
         />
         {children}
       </div>

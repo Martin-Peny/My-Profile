@@ -56,7 +56,7 @@ test("About Me and My Life record fit desktop, tablet, and phones", async ({ pag
   await expect(transition).toHaveAttribute("aria-hidden", "true");
   expect(await transition.evaluate(element => element.previousElementSibling?.className)).toBe("gallery-content-space");
   expect(await page.locator("#my-life").evaluate(element => getComputedStyle(element).backgroundColor)).toBe("rgb(24, 15, 17)");
-  await expect(page.getByRole("img", { name: "Portrait of Haoyang Lin wearing glasses and dangling earrings." })).toHaveCount(1);
+  await expect(page.getByRole("img", { name: "Portrait of Haoyang Ling wearing glasses and dangling earrings." })).toHaveCount(1);
   for (const asset of ["about-portrait.png", "about-portrait.webp"]) {
     expect((await request.get(`/images/${asset}`)).ok()).toBe(true);
   }

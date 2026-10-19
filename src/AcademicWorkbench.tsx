@@ -36,7 +36,7 @@ export default function AcademicWorkbench() {
       <div className="academic-topline micro">
         <span><span className="red-square" />{t("05 / ACADEMIC")}</span>
         <span>{t("RESEARCH DESK / OPEN NOTEBOOK")}</span>
-        <span>{t("BOOK 001 / HAOYANG LIN")}</span>
+        <span>{t("BOOK 001 / HAOYANG LING")}</span>
       </div>
 
       <div className="academic-intro">
@@ -116,7 +116,7 @@ export default function AcademicWorkbench() {
             <text x="48" y="169" fill="#a9565f" fontFamily="monospace" fontSize="12">{t("FIELD NOTES")}</text>
             <path d="M48 196h220M48 376h220" stroke="#8e303c" />
             <circle cx="159" cy="284" r="50" fill="none" stroke="#7f303c" />
-            <text x="48" y="402" fill="#a16970" fontFamily="monospace" fontSize="11">{t("HAOYANG LIN")}</text>
+            <text x="48" y="402" fill="#a16970" fontFamily="monospace" fontSize="11">{t("HAOYANG LING")}</text>
           </svg>
           {!bookOpen && <span className="academic-book-hint micro">{t("OPEN NOTES")} <b>↗</b></span>}
         </button>

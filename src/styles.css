@@ -703,10 +703,13 @@ h1 > span {
   gap: 28px;
   margin-right: 28px;
 }
+.decorative-asterisk {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: -0.08em;
+}
 .ticker-star {
-  font-family: Arial;
   font-size: 33px;
-  font-weight: 400;
 }
 .ticker-arrows {
   font-family: Arial;

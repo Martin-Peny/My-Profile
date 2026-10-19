@@ -1,5 +1,5 @@
 export const artist = {
-  name: "Haoyang Lin",
+  name: "Haoyang Ling",
   role: "Musician",
 };
 

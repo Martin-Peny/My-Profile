@@ -1,4 +1,4 @@
-# Haoyang Lin — Enter the Frequency
+# Haoyang Ling — Enter the Frequency
 
 ## Repository
 
@@ -12,7 +12,7 @@ git push
 
 Original photographs (`photo/` and `scripts/assets/`), private reference documents (`docs/information/`), environment files, dependencies, build output, and QA artifacts stay local and are ignored by Git. The ready-to-use website assets in `public/` are included, so a fresh checkout can build without private source material. Regenerating image assets requires the original local source files.
 
-音乐人 Haoyang Lin 的个人网站。以参考图中的工业科幻、设备线框、工程标注、网格与高对比排版为视觉基础，使用炭黑背景、红色强调色与浅灰文字。
+音乐人 Haoyang Ling 的个人网站。以参考图中的工业科幻、设备线框、工程标注、网格与高对比排版为视觉基础，使用炭黑背景、红色强调色与浅灰文字。
 
 ## English and Simplified Chinese
 
@@ -119,7 +119,7 @@ The registry renderer has four small integration changes: an optional first-pain
 
 ## 内容边界
 
-目前确认姓名 **Haoyang Lin**、音乐人身份及用户提供的 Hero 人像。页面中的标语为设计文案；舞台与学术经历区块明确标注待补充。未添加未经提供的真实作品、专辑、演出、履历、社交链接或联系方式。获得真实素材后，可补充个人介绍及对应的真实经历。
+目前确认姓名 **Haoyang Ling**、音乐人身份及用户提供的 Hero 人像。页面中的标语为设计文案；舞台与学术经历区块明确标注待补充。未添加未经提供的真实作品、专辑、演出、履历、社交链接或联系方式。获得真实素材后，可补充个人介绍及对应的真实经历。
 
 ## Background music
 

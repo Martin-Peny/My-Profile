@@ -2,13 +2,13 @@
 
 ## 项目定位
 
-本项目用于构建和维护 **Haoyang Lin（凌浩洋）的个人网站**，以清晰、可信、易于维护的方式介绍本人及其经历、作品与联系方式。
+本项目用于构建和维护 **Haoyang Ling（凌浩洋）的个人网站**，以清晰、可信、易于维护的方式介绍本人及其经历、作品与联系方式。
 
 - 本文件适用于整个项目；子目录如有 `AGENTS.md`，其说明仅细化对应目录的约定。
 - 用户当前明确提出的要求优先于本文件中的默认约定。
 - Communicate with the user in Chinese by default. The website supports English and Simplified Chinese; maintain both versions together. Use English for new or updated project documentation, code comments, and identifiers unless the user explicitly requests another language.
 - When the user provides requirements or content in either language, independently prepare clear, natural English and Simplified Chinese website copy. Preserve the original meaning, factual details, and official spellings of names; do not add unsupported information or require the user to supply a translation.
-- 网站所有者姓名使用用户最新指定的 **Haoyang Lin**，中文名为 **凌浩洋**；此拼写依据用户提供的信息，不依据目录名推断。
+- 网站所有者姓名使用用户最新指定的 **Haoyang Ling**，中文名为 **凌浩洋**；此拼写依据用户提供的信息，不依据目录名推断。
 
 ## Bilingual content maintenance
 
@@ -20,7 +20,7 @@
 
 ## 个人信息与内容
 
-- `docs/information/personal-information.md` 是 **Haoyang Lin（凌浩洋）的个人信息资料**，由用户提供，包含联系方式、教育经历、个人能力、工作经历、项目经历及校园活动与领导经历；维护相关内容时应先查阅此文件，并以用户后续提供的最新资料为准。
+- `docs/information/personal-information.md` 是 **Haoyang Ling（凌浩洋）的个人信息资料**，由用户提供，包含联系方式、教育经历、个人能力、工作经历、项目经历及校园活动与领导经历；维护相关内容时应先查阅此文件，并以用户后续提供的最新资料为准。
 - 该资料文件用于内容维护；将资料写入文档不代表授权将其中全部信息自动发布到网站，公开展示应遵循用户对具体任务的要求。
 - 仅使用用户提供或项目中已有的、可确认的个人信息。
 - 不编造教育经历、任职信息、研究方向、论文、奖项、项目成果、技能、照片、社交账号或联系方式。

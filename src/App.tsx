@@ -1,7 +1,7 @@
 import { useLanguage, LanguageSwitch } from "./i18n";
 import { lazy, Suspense, useEffect, useState } from "react";
 import { aboutMe, artist, myLife, profileSections } from "./content";
-import { Arrow, Mark, SoundIcon } from "./icons";
+import { Arrow, Asterisk, Mark, SoundIcon } from "./icons";
 import { TechnicalOrbit, Waveform } from "./TechnicalArt";
 import NavigationArt from "./NavigationArt";
 import PortraitFallback from "./PortraitFallback";
@@ -74,7 +74,7 @@ function App() {
           <span>
             HAOYANG
             <span>
-              LIN<span className="brand-dot">↗</span>
+              LING<span className="brand-dot">↗</span>
             </span>
           </span>
         </a>
@@ -156,12 +156,12 @@ function App() {
                 {t(artist.name).toUpperCase()}{" "}
                 <span className="muted">/ {t(artist.role).toUpperCase()}</span>
               </div>
-              <h1 id="hero-title" aria-label={t("I AM, HAOYANG LIN")}>
+              <h1 id="hero-title" aria-label={t("I AM, HAOYANG LING")}>
                 <span className="hero-title-line hero-title-intro">{t("I AM")}<span className="hero-title-comma">{locale === "zh" ? "，" : ","}</span></span>
                 <span className="hero-title-wave" aria-hidden="true">
                   <Waveform animated={musicPlaying} flat={!musicPlaying} />
                 </span>
-                <span className="hero-title-line hero-title-name">{t("HAOYANG LIN")}</span>
+                <span className="hero-title-line hero-title-name">{t("HAOYANG LING")}</span>
               </h1>
               <div className="hero-description">
                 <span className="tiny-bars" aria-hidden="true">
@@ -275,16 +275,14 @@ function App() {
               <span>{t("FREQUENCY.")}</span>
             </h2>
             <div className="section-intro">
-              <span className="section-cross" aria-hidden="true">
-                ✳
-              </span>
+              <Asterisk className="section-cross" />
               <p>
                 {t("One person. Three perspectives.")}
                 <br />
                 {t("Choose a chapter. Get to know me.")}
               </p>
               <span className="micro muted">
-                {t("A CLOSER LOOK AT HAOYANG LIN")}
+                {t("A CLOSER LOOK AT HAOYANG LING")}
                 <br />
                 {t("EXPLORE THE CHAPTERS BELOW ↗")}
               </span>
@@ -359,7 +357,7 @@ function App() {
               {t("03 / INTRODUCTION")}
             </span>
             <span>{t("THE PERSON BEHIND THE FREQUENCY")}</span>
-            <span>{t("HAOYANG LIN")}</span>
+            <span>{t("HAOYANG LING")}</span>
           </div>
           <div className="gallery-heading">
             <div>

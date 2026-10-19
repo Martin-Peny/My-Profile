@@ -10,7 +10,7 @@ test("desktop renders, anchors resolve, and the artist identity stays correct", 
   });
   await page.goto("/");
   await page.evaluate(() => document.fonts.ready);
-  await expect(page).toHaveTitle("Haoyang Lin — Enter the Frequency");
+  await expect(page).toHaveTitle("Haoyang Ling — Enter the Frequency");
   await expect(
     page.locator('.hero-portrait canvas[data-rendered="true"]'),
   ).toBeVisible();

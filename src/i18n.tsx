@@ -22,8 +22,8 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useLayoutEffect(() => {
     document.documentElement.lang = locale === "zh" ? "zh-CN" : "en";
-    document.title = t("Haoyang Lin — Enter the Frequency");
-    document.querySelector('meta[name="description"]')?.setAttribute("content", t("Enter the frequency. The personal website of musician Haoyang Lin — an introduction, stage experience, and academic experience."));
+    document.title = t("Haoyang Ling — Enter the Frequency");
+    document.querySelector('meta[name="description"]')?.setAttribute("content", t("Enter the frequency. The personal website of musician Haoyang Ling — an introduction, stage experience, and academic experience."));
     const syncUrl = () => updateLocale(readLocale());
     window.addEventListener("popstate", syncUrl);
     return () => window.removeEventListener("popstate", syncUrl);

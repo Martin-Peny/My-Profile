@@ -2,6 +2,7 @@ import { useLanguage } from "./i18n";
 import { Fragment, useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import images from "./gallery-images.json";
+import { Asterisk } from "./icons";
 
 const rows = [
   { id: "top", label: "Top row, landscape photographs", direction: "left" },
@@ -18,8 +19,8 @@ function SignalTicker() {
           <div className="ticker-sequence" key={group}>
             {[0, 1].map(item => (
               <span className="ticker-phrase" key={item}>
-                {t("NO SIGNAL. NO LIMITS.")}<span className="ticker-star">✳</span> {t("JUST SOUND.")}<span className="ticker-arrows">↗↗</span>{t("HAOYANG LIN")}
-                <span className="ticker-star">✳</span>
+                {t("IDEAS INTO ACTION.")}<Asterisk className="ticker-star" /> {t("PASSION INTO PURPOSE.")}<span className="ticker-arrows">↗↗</span>{t("HAOYANG LING")}
+                <Asterisk className="ticker-star" />
               </span>
             ))}
           </div>
