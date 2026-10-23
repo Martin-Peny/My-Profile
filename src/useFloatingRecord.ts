@@ -38,9 +38,10 @@ export function useFloatingRecord(
   useLayoutEffect(() => {
     if (!buttonRef.current) return;
     const area = bounds();
+    const initialTop = (parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--header-height")) || 80) + 16;
     const next = moved.current && point
       ? { x: clamp(point.x, area.left, area.right - area.size), y: clamp(point.y, area.top, area.bottom - area.size) }
-      : { x: area.left, y: (area.top + area.bottom - area.size) / 2 };
+      : { x: area.left, y: clamp(initialTop, area.top, area.bottom - area.size) };
     if (!point || next.x !== point.x || next.y !== point.y) {
       setPoint(next);
       return;

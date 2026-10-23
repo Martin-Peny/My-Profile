@@ -22,7 +22,7 @@ async function expectInViewport(page: Page, selector: string) {
 
 for (const width of [390, 1440]) {
   for (const locale of ["en", "zh"]) {
-    test(`record starts left-center and drags without opening (${locale}, ${width}px)`, async ({ page }) => {
+    test(`record starts upper-left and drags without opening (${locale}, ${width}px)`, async ({ page }) => {
       const errors: string[] = [];
       page.on("pageerror", error => errors.push(error.message));
       await page.setViewportSize({ width, height: 900 });
@@ -30,7 +30,9 @@ for (const width of [390, 1440]) {
       await page.goto(`${fixture}?lang=${locale}`);
       const initial = (await circle(page).boundingBox())!;
       expect(initial.x).toBe(width <= 760 ? 12 : 20);
-      expect(initial.y + initial.height / 2).toBe(450);
+      expect(initial.y).toBe(width <= 760 ? 94 : 107);
+      await expect(circle(page).locator(".music-record-label")).toHaveText("HL");
+      await expect(circle(page).locator("svg")).toHaveCount(0);
       await expect(page.locator(".music-intro-hint")).toContainText(locale === "zh" ? "点击听音乐" : "Click to listen");
       await expect(circle(page)).toHaveAttribute("title", locale === "zh" ? "音乐播放器" : "Music player");
       await expectInViewport(page, ".music-intro-hint");
@@ -118,7 +120,7 @@ test("touch drag does not scroll the page or open the playlist; tap and cancelle
   expect(await page.evaluate(() => scrollY)).toBe(0);
   const moved = (await circle(page).boundingBox())!;
   expect(moved.x).toBeGreaterThan(initial.x + 80);
-  expect(moved.y).toBeLessThan(initial.y - 80);
+  expect(moved.y).toBeGreaterThan(initial.y + 80);
   await circle(page).tap();
   await expect(page.locator(".music-panel")).toBeVisible();
   await expectInViewport(page, ".music-panel");

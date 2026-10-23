@@ -105,7 +105,7 @@ test("music controls remain usable on mobile and desktop", async ({ page }) => {
     expect(bounds.x).toBeGreaterThanOrEqual(0);
     expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
     expect(bounds.x).toBe(width <= 760 ? 12 : 20);
-    expect(bounds.y + bounds.height / 2).toBeCloseTo(844 / 2);
+    expect(bounds.y).toBe(width <= 760 ? 94 : 107);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.screenshot({ path: `artifacts/background-music-${width}.png` });
   }
