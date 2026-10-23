@@ -30,8 +30,7 @@ test("keyboard switching translates content, metadata, and accessible controls",
   await expect(page.locator(".my-life-copy")).toContainText("2022–2023");
   await expect(page.locator(".portrait-fallback")).toHaveAttribute("alt", /凌浩洋穿着红色连帽衫/);
   await expect(page.locator(".gallery-sequence").first().locator("img").first()).toHaveAttribute("alt", /蓝色灯光的舞台/);
-  await expect(page.getByRole("group", { name: "背景音乐" })).toBeVisible();
-  await expect(page.locator(".bgm-volume input")).toHaveAccessibleName("背景音乐音量");
+  await expect(page.getByRole("group", { name: "音乐播放器" })).toBeVisible();
   await expect(page.getByRole("button", { name: "Switch to English" })).toBeFocused();
   await page.keyboard.press("Enter");
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
@@ -192,6 +191,7 @@ test("switching preserves book, gallery, and audio state and rebuilds localized 
   await page.emulateMedia({ reducedMotion: "no-preference" });
   await expect(page.locator(".photo-gallery")).toHaveAttribute("data-motion", "auto");
   await page.getByRole("button", { name: "PAUSE GALLERY" }).click();
+  await page.getByRole("button", { name: "Open playlist" }).click();
   await page.locator(".bgm-volume input").fill("62");
   await page.evaluate(() => document.querySelector("audio")!.dataset.retained = "yes");
   await page.getByRole("button", { name: "切换为中文" }).click();
@@ -219,4 +219,72 @@ test("language selection stays usable when browser storage is unavailable", asyn
   await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
   await page.reload();
   await expect(page.locator("html")).toHaveAttribute("lang", "zh-CN");
+});
+
+test("record player preserves bilingual playback state and fits desktop, mobile and short screens", async ({ page }) => {
+  test.setTimeout(90_000);
+  const errors: string[] = [];
+  page.on("pageerror", error => errors.push(error.message));
+  page.on("console", message => { if (message.type() === "error") errors.push(message.text()); });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/?lang=en#introduction");
+  await page.getByRole("button", { name: "Open playlist" }).click();
+  await page.locator(".music-main-play").click();
+  await expect(page.locator(".background-music")).toHaveAttribute("data-playing", "true");
+  await page.getByRole("slider", { name: "Music volume" }).fill("57");
+  await page.locator(".background-music audio").evaluate((a: HTMLAudioElement) => { a.dataset.retained = "yes"; a.currentTime = 17; });
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const locale of ["en", "zh"]) {
+      if (locale === "zh") await page.getByRole("button", { name: "切换为中文" }).click();
+      const panel = page.locator(".music-panel");
+      await expect(panel).toBeVisible();
+      await expect(page.getByRole("group", { name: locale === "zh" ? "音乐播放器" : "Music player", exact: true })).toBeVisible();
+      await expect(page.getByRole("searchbox", { name: locale === "zh" ? "搜索歌曲" : "Search songs", exact: true })).toBeVisible();
+      await expect(page.locator(".music-current-copy h3")).toHaveText(locale === "zh" ? "背景音乐" : "Background music");
+      await expect(page.locator(".bgm-volume input")).toHaveAccessibleName(locale === "zh" ? "音乐音量" : "Music volume");
+      await expect(page.locator(".bgm-volume input")).toHaveValue("57");
+      await expect(page.locator(".background-music audio")).toHaveAttribute("data-retained", "yes");
+      await expect(page.locator(".background-music")).toHaveAttribute("data-playing", "true");
+      await expect(page.locator(".music-record-toggle .music-record")).toHaveCSS("animation-name", "none");
+      await expect(panel).toHaveCSS("animation-name", "none");
+      const bounds = (await panel.boundingBox())!;
+      expect(bounds.x).toBeGreaterThanOrEqual(0);
+      expect(bounds.y).toBeGreaterThanOrEqual(0);
+      expect(bounds.x + bounds.width).toBeLessThanOrEqual(width);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      await page.screenshot({ path: `artifacts/record-player-${locale}-${width}.png` });
+      await page.locator(".music-record-toggle").click();
+      const circle = (await page.locator(".background-music").boundingBox())!;
+      expect(circle.width).toBe(width <= 760 ? 56 : 68);
+      expect(circle.height).toBe(circle.width);
+      await expect(page.locator(".background-music").getByRole("button")).toHaveCount(1);
+      await page.screenshot({ path: `artifacts/record-circle-${locale}-${width}.png` });
+      await page.locator(".music-record-toggle").click();
+      if (locale === "zh") await page.getByRole("button", { name: "Switch to English" }).click();
+    }
+  }
+  expect(await page.locator(".background-music audio").evaluate((a: HTMLAudioElement) => a.currentTime)).toBeGreaterThan(17);
+  await page.setViewportSize({ width: 667, height: 375 });
+  const bounds = (await page.locator(".music-panel").boundingBox())!;
+  expect(bounds.y).toBeGreaterThanOrEqual(0);
+  expect(bounds.y + bounds.height).toBeLessThan(375);
+  await page.getByRole("button", { name: "Play track: Background music", exact: true }).scrollIntoViewIfNeeded();
+  await expect(page.getByRole("button", { name: "Play track: Background music", exact: true })).toBeInViewport();
+  await page.screenshot({ path: "artifacts/record-player-short-screen.png" });
+  await page.getByRole("searchbox").focus();
+  await page.keyboard.press("Escape");
+  await expect(page.locator(".music-panel")).toBeHidden();
+  await expect(page.locator(".music-record-toggle")).toBeFocused();
+  await page.keyboard.press("Enter");
+  await expect(page.locator(".music-panel")).toBeVisible();
+  await page.locator(".music-main-play").click();
+  await expect(page.locator(".background-music audio")).toHaveJSProperty("paused", true);
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.getByRole("button", { name: "切换为中文" }).click();
+  await expect(page.locator(".music-panel")).toBeVisible();
+  await page.locator(".brand").click();
+  await expect(page.locator(".music-panel")).toBeHidden();
+  await expect(page.locator(".background-music audio")).toHaveJSProperty("paused", true);
+  expect(errors).toEqual([]);
 });

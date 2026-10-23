@@ -14,9 +14,13 @@ export default defineConfig({
     launchOptions: { args: ["--enable-unsafe-swiftshader"] },
     trace: "retain-on-failure",
   },
-  webServer: {
+  webServer: [{
     command: "npm run preview -- --port 5199 --strictPort",
     url: "http://127.0.0.1:5199",
     reuseExistingServer: false,
-  },
+  }, {
+    command: "npm run dev -- --port 5200 --strictPort",
+    url: "http://127.0.0.1:5200",
+    reuseExistingServer: false,
+  }],
 });
