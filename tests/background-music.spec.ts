@@ -44,6 +44,8 @@ test("background track plays on request, pauses, resumes, loops, and survives na
   await page.keyboard.press("Enter");
   await expect.poll(() => audio.evaluate((element: HTMLAudioElement) => element.currentTime)).toBeGreaterThan(pausedAt);
 
+  await page.getByRole("button", { name: "Playback mode: In order", exact: true }).click();
+  await page.getByRole("button", { name: "Playback mode: Shuffle", exact: true }).click();
   await audio.evaluate((element: HTMLAudioElement) => { element.currentTime = element.duration - 0.3; });
   await expect.poll(() => audio.evaluate((element: HTMLAudioElement) => element.currentTime), { timeout: 10000 }).toBeLessThan(2);
   expect(await audio.evaluate((element: HTMLAudioElement) => element.paused)).toBe(false);
