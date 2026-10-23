@@ -31,7 +31,12 @@ for (const width of [390, 1440]) {
       const initial = (await circle(page).boundingBox())!;
       expect(initial.x).toBe(width <= 760 ? 12 : 20);
       expect(initial.y + initial.height / 2).toBe(450);
+      await expect(page.locator(".music-intro-hint")).toContainText(locale === "zh" ? "点击听音乐" : "Click to listen");
+      await expect(circle(page)).toHaveAttribute("title", locale === "zh" ? "音乐播放器" : "Music player");
+      await expectInViewport(page, ".music-intro-hint");
+      await page.screenshot({ path: `artifacts/record-discovery-${locale}-${width}.png` });
       await drag(page, width - 80, 650);
+      await expect(page.locator(".music-intro-hint")).toHaveCount(0);
       await expect(page.locator(".music-panel")).toBeHidden();
       const moved = (await circle(page).boundingBox())!;
       expect(moved.x).toBeGreaterThan(initial.x);
@@ -55,6 +60,7 @@ for (const width of [390, 1440]) {
       await circle(page).click();
       await expect(page.locator(".music-panel")).toBeHidden();
       await page.reload();
+      await expect(page.locator(".music-intro-hint")).toBeVisible();
       const reset = (await circle(page).boundingBox())!;
       expect(reset.x).toBe(initial.x);
       expect(reset.y).toBe(initial.y);

@@ -44,6 +44,7 @@ export default function BackgroundMusic({ onPlayingChange, tracks = musicTracks 
   const shuffleBag = useRef<number[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [open, setOpen] = useState(false);
+  const [showIntro, setShowIntro] = useState(true);
   const floating = useFloatingRecord(launcherRef, panelRef, open, () => setOpen(current => !current));
   const [playing, setPlaying] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -58,6 +59,10 @@ export default function BackgroundMusic({ onPlayingChange, tracks = musicTracks 
   const modeLabel = mode === "ordered" ? "In order" : mode === "shuffle" ? "Shuffle" : "Repeat one";
 
   useEffect(() => { onPlayingChange?.(playing); }, [playing, onPlayingChange]);
+
+  useEffect(() => {
+    if (open || floating.dragging) setShowIntro(false);
+  }, [open, floating.dragging]);
 
   async function startPlayback(automatic = false) {
     const audio = audioRef.current;
@@ -214,9 +219,14 @@ export default function BackgroundMusic({ onPlayingChange, tracks = musicTracks 
         onEnded={() => { setPlaying(false); nextTrack(); }}
         onError={event => { if (!event.currentTarget.error) return; wantsPlayback.current = false; setPlaying(false); setLoading(false); setError(true); }}
       />
-      <button ref={launcherRef} className="music-record-toggle" type="button" aria-label={t(open ? "Close playlist" : "Open playlist")} aria-description={t("Drag the record to move it. Click to open the playlist.")} aria-expanded={open} aria-controls="music-panel" {...floating.pointerHandlers} onClick={event => { if (floating.allowClick(event.detail === 0)) setOpen(!open); }}>
-        <span className="music-record" aria-hidden="true"><span className="music-record-label"><span>HL</span></span></span>
+      <button ref={launcherRef} className="music-record-toggle" type="button" title={t("Music player")} aria-label={t(open ? "Close playlist" : "Open playlist")} aria-description={`${t("Music player")}. ${t("Drag the record to move it. Click to open the playlist.")}`} aria-expanded={open} aria-controls="music-panel" {...floating.pointerHandlers} onClick={event => { if (floating.allowClick(event.detail === 0)) setOpen(!open); }}>
+        <span className="music-record" aria-hidden="true"><span className="music-record-label" /></span>
+        <span className="music-launcher-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="23" height="23" fill="none"><path d="M10 17V6l10-2v11M10 9l10-2" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" /><ellipse cx="7" cy="17.5" rx="3" ry="2.5" fill="currentColor" /><ellipse cx="17" cy="15.5" rx="3" ry="2.5" fill="currentColor" /></svg>
+          <span>{t("MUSIC")}</span>
+        </span>
       </button>
+      {showIntro && <span className="music-intro-hint" aria-hidden="true"><span>{t("Music player")}</span><strong>{t("Click to listen")}</strong></span>}
       <section ref={panelRef} className="music-panel" id="music-panel" aria-labelledby="music-panel-title" hidden={!open} style={floating.panelStyle}>
         <header className="music-panel-header">
           <div><span className="music-eyebrow">{t("Haoyang Ling")} / {t("MUSIC")}</span><h2 id="music-panel-title">{t("ON THE RECORD")}</h2></div>

@@ -256,7 +256,7 @@ test("record player preserves bilingual playback state and fits desktop, mobile 
       await page.screenshot({ path: `artifacts/record-player-${locale}-${width}.png` });
       await page.locator(".music-record-toggle").click();
       const circle = (await page.locator(".background-music").boundingBox())!;
-      expect(circle.width).toBe(width <= 760 ? 56 : 68);
+      expect(circle.width).toBe(width <= 760 ? 76 : 92);
       expect(circle.height).toBe(circle.width);
       await expect(page.locator(".background-music").getByRole("button")).toHaveCount(1);
       await page.screenshot({ path: `artifacts/record-circle-${locale}-${width}.png` });

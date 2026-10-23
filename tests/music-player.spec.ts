@@ -22,6 +22,7 @@ test("opening only reveals controls; playback, seeking, volume and mute use one 
   page.on("request", request => { if (request.url().includes("/audio/")) requested.push(request.url()); });
   await openPlayer(page);
   await expect(audio(page)).toHaveJSProperty("paused", true);
+  await expect(page.locator(".music-intro-hint")).toHaveCount(0);
   await expect(page.locator("audio")).toHaveCount(1);
   await expect(page.getByRole("status")).toBeEmpty();
   await page.locator(".music-main-play").click();

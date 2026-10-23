@@ -96,7 +96,7 @@ test("music controls remain usable on mobile and desktop", async ({ page }) => {
     await page.setViewportSize({ width, height: 844 });
     const player = page.getByRole("group", { name: "Music player" });
     const bounds = (await player.boundingBox())!;
-    const diameter = width <= 760 ? 56 : 68;
+    const diameter = width <= 760 ? 76 : 92;
     expect(bounds.width).toBe(diameter);
     expect(bounds.height).toBe(diameter);
     await expect(player.getByRole("button")).toHaveCount(1);
