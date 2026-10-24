@@ -29,6 +29,16 @@ export const musicTracks: MusicTrack[] = [
     title: "用背脊唱情歌",
     src: "https://linghaoyang.oss-cn-beijing.aliyuncs.com/%E7%94%A8%E8%83%8C%E8%84%8A%E5%94%B1%E6%83%85%E6%AD%8C%20Martin.wav",
   },
+  {
+    id: "sha-long",
+    title: "沙龙",
+    src: "https://linghaoyang.oss-cn-beijing.aliyuncs.com/%E6%B2%99%E9%BE%99%20Martin.wav",
+  },
+  {
+    id: "yi-lei",
+    title: "异类",
+    src: "https://linghaoyang.oss-cn-beijing.aliyuncs.com/%E5%BC%82%E7%B1%BB%20Martin.wav",
+  },
 ];
 
 export function musicAssetUrl(path: string): string {
