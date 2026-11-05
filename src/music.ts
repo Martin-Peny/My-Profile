@@ -32,7 +32,7 @@ export const musicTracks: MusicTrack[] = [
   {
     id: "sha-long",
     title: "沙龙",
-    src: "https://linghaoyang.oss-cn-beijing.aliyuncs.com/%E6%B2%99%E9%BE%99%20Martin.wav",
+    src: "https://linghaoyang.oss-cn-beijing.aliyuncs.com/%E6%B2%99%E9%BE%99%20Martin%2020261026.wav",
   },
   {
     id: "yi-lei",
